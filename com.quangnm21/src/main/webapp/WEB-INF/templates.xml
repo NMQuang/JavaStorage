@@ -1,0 +1,34 @@
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <definition name="DefaultTemplate" template="/WEB-INF/view/template/layout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/view/template/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/view/template/menu.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer" value="/WEB-INF/view/template/footer.jsp" />
+    </definition>
+
+    <definition name="homePage" extends="DefaultTemplate">
+        <put-attribute name="title" value="Trang chủ" />
+        <put-attribute name="content" value="/WEB-INF/view/home.jsp" />
+    </definition>
+
+    <definition name="aboutPage" extends="DefaultTemplate">
+        <put-attribute name="title" value="Giới thiệu" />
+        <put-attribute name="content" value="/WEB-INF/view/about.jsp" />
+    </definition>
+
+    <definition name="productPage" extends="DefaultTemplate">
+        <put-attribute name="title" value="Sản phẩm" />
+        <put-attribute name="content" value="/WEB-INF/view/product.jsp" />
+    </definition>
+
+    <definition name="contactPage" extends="DefaultTemplate">
+        <put-attribute name="title" value="Contact" />
+        <put-attribute name="content" value="/WEB-INF/view/contact.jsp" />
+    </definition>
+
+</tiles-definitions>
