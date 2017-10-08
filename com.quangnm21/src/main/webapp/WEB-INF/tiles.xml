@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+   "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+<definition name="Page" template="/Template/template.jsp">
+	<put-attribute name="title" value="Page" />
+	<put-attribute name="header" value="/views/header.jsp" />
+	<put-attribute name="footer" value="/views/footer.jsp" />
+</definition>
+<definition name="HomePage" extends="Page">
+	<put-attribute name="title" value="Home Page" />
+	<put-attribute name="content" value="/views/HomePage.jsp"/>
+</definition>
+
+<definition name="Login" extends="Page">
+<put-attribute name="title" value="Login" />
+<put-attribute name="content" value="/views/login.jsp"/>
+</definition>
+
+<definition name="DetailProduct" extends="Page">
+<put-attribute name="title" value="Detail Product" />
+<put-attribute name="content" value="/views/singleProduct.jsp"/>
+</definition>
+
+<definition name="CartProduct" extends="Page">
+<put-attribute name="title" value="Cart Product" />
+<put-attribute name="content" value="/views/cart.jsp"/>
+</definition>
+
+</tiles-definitions>
