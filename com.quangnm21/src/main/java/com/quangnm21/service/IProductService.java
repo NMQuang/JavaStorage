@@ -1,0 +1,17 @@
+package com.quangnm21.service;
+
+import java.util.List;
+
+import com.quangnm21.entity.Product;
+
+
+
+public interface IProductService {
+	//public void addStrategy(Strategy strategy);
+    public Product getlistProductByID(int id);
+   // public void updateStrategy(Strategy strategy);
+   // public void deleteStrategy(int id);
+    public List<Product> getlistProduct();
+    public List<Product> getlistTopBestSaleProduct();
+
+}
