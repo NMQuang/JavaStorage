@@ -1,0 +1,105 @@
+## 1. API lấy danh sách các category
+
+ @RequestMapping(value = "/category/", method = RequestMethod.GET)
+    public ResponseEntity<List<Category>> listAllCategorys() {
+        List<Category> Categorys = CategoryService.findAllCategorys();
+        if(Categorys.isEmpty()){
+            return new ResponseEntity<List<Category>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Category>>(Categorys, HttpStatus.OK);
+    }
+	
+
+## 2. API lấy danh sách episode mới nhất của các hot category
+
+ @RequestMapping(value = "/episode/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
+        System.out.println("Fetching User with id " + id);
+        User user = userService.getEpisodeById(id);
+        if (user == null) {
+            System.out.println("User with id " + id + " not found");
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+	
+## 3. API lấy thông tin của 1 channel theo channel id
+ @RequestMapping(value = "/channel/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Channel> getChannel(@PathVariable("id") long id) {
+        System.out.println("Fetching Channel with id " + id);
+        Channel channel = channelService.getChannelById(id);
+        if (channel == null) {
+            System.out.println("Channel with id " + id + " not found");
+            return new ResponseEntity<Channel>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Channel>(channel, HttpStatus.OK);
+    }
+	
+## 4. API lây danh sách channel theo category id (không bao gồm các episodes của các channel đó)
+@RequestMapping(value = "/channel/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Channel> getChannel(@PathVariable("id") long id) {
+        System.out.println("Fetching Channel with id " + id);
+        List<Channel> channel = userService.getListChannelById(id);
+        if (channel == null) {
+            System.out.println("User with id " + id + " not found");
+            return new ResponseEntity<Channel>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Channel>(channel, HttpStatus.OK);
+    }
+	
+## 5. API lấy danh sách các episode của 1 channel theo channel id
+@RequestMapping(value = "/channel/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Store> getStore(@PathVariable("id") long id) {
+        System.out.println("Fetching Channel with id " + id);
+        List<Store> store = storeService.getListEpisodeById(id);
+        if (store == null) {
+            System.out.println("Store with id " + id + " not found");
+            return new ResponseEntity<Store>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Store>(store, HttpStatus.OK);
+    }
+	
+## 6. API đăng ký kênh cho người dùng
+
+## 7. API search channel theo từ khóa
+@RequestMapping(value = "/channel/{str}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Channel> getChannel(@PathVariable("str") long str) {
+        System.out.println("Fetching Channel with id " + str);
+        Channel channel = userService.findById(str);
+        if (channel == null) {
+            System.out.println("User with str " + str + " not found");
+            return new ResponseEntity<Channel>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Channel>(channel, HttpStatus.OK);
+    }
+	
+## 8. API đăng nhập  cho người dùng
+@RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getLogin(@RequestBody User data) {
+        User user = userService.findByEmail(data.getUserName());
+        
+        if (user == null) {
+            System.out.println("User with str " + str + " not found");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+		
+		if(user.getPassword().equal(data.getPassword())){
+			return new ResponseEntity<>(data,HttpStatus.OK);
+		}
+		
+        return new ResponseEntity<Channel>(channel, HttpStatus.BAD_REQUEST);
+    }
+## 8. API đăng ký  cho người dùng
+@RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getRegister(@RequestBody User data) {
+		
+        if (userService.checkValidateUser()) {
+			userService.createUser(data);
+			return new ResponseEntity<>(data,HttpStatus.OK);
+		} else {
+			System.out.println("Error register);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+        return new ResponseEntity<Channel>(channel, HttpStatus.BAD_REQUEST);
+    }
