@@ -28,4 +28,13 @@ public class MP3DaoImpl implements IMP3Dao {
 		return hibernateUtil.fetchAll(query);
 	}
 
+	@Override
+	public List<MP3> getMP3ByChannelId(int id) {
+		String query = "SELECT m FROM MP3 m"
+				+ "JOIN m.store s"
+				+ "JOIN s.channel c"
+				+ "WHERE c.id = " +id;
+		return hibernateUtil.fetchAll(query);
+	}
+
 }

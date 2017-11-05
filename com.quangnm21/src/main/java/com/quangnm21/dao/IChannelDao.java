@@ -10,4 +10,6 @@ public interface IChannelDao {
 	Channel getChannelById(int id);
 
 	List<Channel> getAllChannelById(int id);
+
+	List<Channel>  getAllChannelByName(String str);
 }

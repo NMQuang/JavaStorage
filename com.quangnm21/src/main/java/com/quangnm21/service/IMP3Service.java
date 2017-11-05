@@ -1,11 +1,10 @@
-package com.quangnm21.dao;
+package com.quangnm21.service;
 
 import java.util.List;
 
 import com.quangnm21.entity.MP3;
 
-
-public interface IMP3Dao {
+public interface IMP3Service {
 
 	List<MP3> getMP3ByCateId(int id);
 

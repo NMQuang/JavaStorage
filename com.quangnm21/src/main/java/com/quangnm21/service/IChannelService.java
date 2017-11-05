@@ -10,4 +10,6 @@ public interface IChannelService {
 	Channel getChannelById(int id);
 
 	List<Channel> getAllChannelById(int id);
+
+	List<Channel>  findByName(String str);
 }

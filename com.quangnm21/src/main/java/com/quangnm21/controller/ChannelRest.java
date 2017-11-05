@@ -43,4 +43,15 @@ public class ChannelRest {
 		}
 		return new ResponseEntity<List<Channel>>(channel, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/channel/{str}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<List<Channel>> getChannel(@PathVariable("str") String str) {
+	        System.out.println("Fetching ChannList<Channel>el with id " + str);
+	        List<Channel> channel = channelService.findByName(str);
+	        if (channel == null) {
+	            System.out.println("User with str " + str + " not found");
+	            return new ResponseEntity<List<Channel>>(HttpStatus.NOT_FOUND);
+	        }
+	        return new ResponseEntity<List<Channel>>(channel, HttpStatus.OK);
+	    }
 }

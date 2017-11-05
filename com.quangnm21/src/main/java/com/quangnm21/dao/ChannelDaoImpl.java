@@ -23,6 +23,11 @@ public class ChannelDaoImpl implements IChannelDao {
 	}
 
 	@Override
+	public List<Channel> getAllChannelByName(String str) {
+		return hibernateUtil.fetchAllByName(str, Channel.class);
+	}
+
+	@Override
 	public List<Channel> getAllChannelById(int id) {
 		return hibernateUtil.fetchAllById(id, Channel.class);
 	}

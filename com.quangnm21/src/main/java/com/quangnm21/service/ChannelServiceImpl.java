@@ -26,4 +26,8 @@ public class ChannelServiceImpl implements IChannelService {
 	public List<Channel> getAllChannelById(int id) {
 		return channelDao.getAllChannelById(id);
 	}
+
+	public List<Channel> findByName(String str) {
+		return channelDao.getAllChannelByName(str);
+	}
 }
