@@ -18,7 +18,7 @@ public class UserDaoImpl implements IUserDao {
 
 	@Override
 	public User getUserByEmail(String email) {
-		String query = "SELECT u FROM User WHERE email LIKE" + email;
+		String query = "SELECT u.username, u.password, u.email FROM User u WHERE u.email LIKE '" + email+"'";
 		List<User> users = hibernateUtil.fetchAll(query);
 		if (users.size() > 0) {
 			return users.get(0);

@@ -22,7 +22,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public boolean checkValidateUser(User user) {
 		boolean result = false;
-		if (userDao.getUserByEmail(user.getUsername()) == null) {
+		if (userDao.getUserByEmail(user.getEmail()) == null) {
 			if (user.getUsername().length() > 6 && user.getUsername().length() < 32 && user.getPassword().length() > 8 && user.getPassword().length() < 32) {
 				result = true;
 			}

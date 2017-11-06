@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="category")
+@Table(name ="mp3")
 public class MP3  implements Serializable {
 
 	/**

@@ -52,7 +52,7 @@ public class HibernateUtil implements Serializable {
 
 	@SuppressWarnings("rawtypes")
 	public <T> List fetchAll(String query) {
-		return sessionFactory.getCurrentSession().createSQLQuery(query).list();
+		return sessionFactory.getCurrentSession().createQuery(query).list();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -62,13 +62,13 @@ public class HibernateUtil implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public <T> List<T> fetchAllById(Serializable id, Class<T> entityClass) {
-		return sessionFactory.getCurrentSession().createQuery(" FROM "+entityClass.getName() + "WHERE id =" + id).list();
+		return sessionFactory.getCurrentSession().createQuery(" FROM "+entityClass.getName() + " WHERE id =" + id).list();
 
 	}
 
 	@SuppressWarnings("unchecked")
 	public <T> List<T> fetchAllByName(String str, Class<T> entityClass) {
-		return sessionFactory.getCurrentSession().createQuery(" FROM "+entityClass.getName() + "WHERE ChanName LIKE " + str).list();
+		return sessionFactory.getCurrentSession().createQuery(" FROM "+entityClass.getName() + " WHERE ChanName LIKE " + str).list();
 
 	}
 }

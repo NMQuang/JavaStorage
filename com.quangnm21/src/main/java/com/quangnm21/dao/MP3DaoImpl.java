@@ -20,19 +20,19 @@ public class MP3DaoImpl implements IMP3Dao {
 	@Override
 	public List<MP3> getMP3ByCateId(int id) {
 		String query ="SELECT m FROM MP3 m "
-				+ "JOIN m.store s "
-				+ "JOIN s.channel c "
-				+ "JOIN c.category "
-				+ "WHERE c.id =  " +id;
+				+ "LEFT outer  JOIN m.store s "
+				+ "LEFT outer  JOIN s.channel c "
+				+ "LEFT outer  JOIN c.category ca "
+				+ "WHERE ca.id = 1";
 
 		return hibernateUtil.fetchAll(query);
 	}
 
 	@Override
 	public List<MP3> getMP3ByChannelId(int id) {
-		String query = "SELECT m FROM MP3 m"
-				+ "JOIN m.store s"
-				+ "JOIN s.channel c"
+		String query = "SELECT m FROM MP3 m "
+				+ "LEFT JOIN m.store s "
+				+ "LEFT JOIN s.channel c "
 				+ "WHERE c.id = " +id;
 		return hibernateUtil.fetchAll(query);
 	}
