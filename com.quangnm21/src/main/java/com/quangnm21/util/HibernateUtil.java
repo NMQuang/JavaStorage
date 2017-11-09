@@ -1,28 +1,20 @@
 package com.quangnm21.util;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
-
-import javax.management.Query;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 //import org.hibernate.metamodel.source.annotations.entity.EntityClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class HibernateUtil implements Serializable {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	@Autowired
 	private  SessionFactory sessionFactory;
 
@@ -55,6 +47,11 @@ public class HibernateUtil implements Serializable {
 		return sessionFactory.getCurrentSession().createQuery(query).list();
 	}
 
+	@SuppressWarnings("rawtypes")
+	public <T>  T fetchById(String query) {
+		return (T)sessionFactory.getCurrentSession().createQuery(query);
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T> T fetchById(Serializable id, Class<T> entityClass) {
 		return (T)sessionFactory.getCurrentSession().get(entityClass, id);
@@ -68,7 +65,7 @@ public class HibernateUtil implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public <T> List<T> fetchAllByName(String str, Class<T> entityClass) {
-		return sessionFactory.getCurrentSession().createQuery(" FROM "+entityClass.getName() + " WHERE ChanName LIKE " + str).list();
+		return sessionFactory.getCurrentSession().createQuery(" FROM "+entityClass.getName() + " WHERE name LIKE " + str).list();
 
 	}
 }

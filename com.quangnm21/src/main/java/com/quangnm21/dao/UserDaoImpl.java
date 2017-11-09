@@ -11,14 +11,14 @@ import com.quangnm21.util.HibernateUtil;
 
 @Repository
 @Transactional
-public class UserDaoImpl implements IUserDao {
+public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private HibernateUtil hibernateUtil;
 
 	@Override
 	public User getUserByEmail(String email) {
-		String query = "SELECT u.username, u.password, u.email FROM User u WHERE u.email LIKE '" + email+"'";
+		String query = "SELECT u FROM User u WHERE u.email LIKE '" + email+"'";
 		List<User> users = hibernateUtil.fetchAll(query);
 		if (users.size() > 0) {
 			return users.get(0);
@@ -29,6 +29,8 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public void createUser(User user) {
 		hibernateUtil.create(user);
+
 	}
+
 
 }

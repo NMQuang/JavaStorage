@@ -4,19 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.quangnm21.dao.IUserDao;
+import com.quangnm21.dao.UserDao;
 import com.quangnm21.entity.User;
+
 
 @Service
 @Transactional
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private IUserDao userDao;
+	private UserDao userDao;
 
 	@Override
-	public User getUserByEmail(String user) {
-		return userDao.getUserByEmail(user);
+	public User getUserByEmail(String email) {
+		return userDao.getUserByEmail(email);
+	}
+
+	@Override
+	public void createUser(User user) {
+		userDao.createUser(user);
 	}
 
 	@Override
@@ -29,10 +35,4 @@ public class UserServiceImpl implements IUserService {
 		}
 		return result;
 	}
-
-	@Override
-	public void createUser(User user) {
-		userDao.createUser(user);
-	}
-
 }

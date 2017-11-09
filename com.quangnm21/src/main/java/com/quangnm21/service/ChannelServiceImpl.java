@@ -6,16 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.quangnm21.dao.IChannelDao;
+import com.quangnm21.dao.ChannelDao;
+import com.quangnm21.dto.ChannelDto;
 import com.quangnm21.entity.Channel;
 
 
 @Service
 @Transactional
-public class ChannelServiceImpl implements IChannelService {
+public class ChannelServiceImpl implements ChannelService {
 
 	@Autowired
-	private IChannelDao channelDao;
+	private ChannelDao channelDao;
 
 	@Override
 	public Channel getChannelById(int id) {
@@ -27,7 +28,13 @@ public class ChannelServiceImpl implements IChannelService {
 		return channelDao.getAllChannelById(id);
 	}
 
-	public List<Channel> findByName(String str) {
+	@Override
+	public List<Channel> getAllChannelByName(String str) {
 		return channelDao.getAllChannelByName(str);
+	}
+
+	@Override
+	public ChannelDto getChannelDtoById(int id) {
+		return channelDao.getChannelDtoById(id);
 	}
 }

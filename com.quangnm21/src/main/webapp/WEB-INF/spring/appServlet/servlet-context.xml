@@ -21,6 +21,12 @@
 	<context:component-scan base-package="com.quangnm21.controller" use-default-filters="false">
 	    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
+	<context:component-scan base-package="com.quangnm21.service" use-default-filters="false">
+	    <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	<context:component-scan base-package="com.quangnm21.dao" use-default-filters="false">
+	    <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	<context:annotation-config />
@@ -83,10 +89,11 @@
       <property name="annotatedClasses">
           <list>
               <value>com.quangnm21.entity.User</value>
-              <value>com.quangnm21.entity.MP3</value>
+              <value>com.quangnm21.entity.Owner</value>
               <value>com.quangnm21.entity.Category</value>
               <value>com.quangnm21.entity.Channel</value>
-              <value>com.quangnm21.entity.Store</value>
+              <value>com.quangnm21.entity.Episode</value>
+              <value>com.quangnm21.entity.UserRating</value>
           </list>
       </property>
 

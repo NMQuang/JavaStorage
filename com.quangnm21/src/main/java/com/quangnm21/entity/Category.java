@@ -11,13 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="category")
-public class Category  implements Serializable {
+public class Category  implements Serializable  {
 
 	/**
 	 *
@@ -26,14 +27,18 @@ public class Category  implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CategoryID", unique = true, nullable = false)
+	@Column(name = "id", unique = true)
 	private int id;
 
-	@Column(name = "CatName", length= 30)
-	private String CatName;
+	@Column(name ="name", length = 45)
+	private String name;
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
-	private Channel channel;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "channel_category", joinColumns = {
+			@JoinColumn(name = "idcategory", nullable = false, updatable = false) },
+			inverseJoinColumns = { @JoinColumn(name = "idchannel",
+					nullable = false, updatable = false) })
+	private Set<Channel> channels = new HashSet<Channel>();
 
 	public int getId() {
 		return id;
@@ -43,20 +48,20 @@ public class Category  implements Serializable {
 		this.id = id;
 	}
 
-	public String getCatName() {
-		return CatName;
+	public String getName() {
+		return name;
 	}
 
-	public void setCatName(String catName) {
-		CatName = catName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Channel getChannel() {
-		return channel;
+	public Set<Channel> getChannels() {
+		return channels;
 	}
 
-	public void setChannel(Channel channel) {
-		this.channel = channel;
+	public void setChannels(Set<Channel> channels) {
+		this.channels = channels;
 	}
 
 }

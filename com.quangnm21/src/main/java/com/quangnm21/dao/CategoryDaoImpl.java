@@ -9,10 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.quangnm21.entity.Category;
 import com.quangnm21.util.HibernateUtil;
 
-
 @Repository
 @Transactional
-public class CategoryDaoImpl implements ICategoryDao {
+public class CategoryDaoImpl implements CategoryDao {
 
 	@Autowired
 	private HibernateUtil hibernateUtil;
@@ -21,5 +20,6 @@ public class CategoryDaoImpl implements ICategoryDao {
 	public List<Category> getAllCategorys() {
 		return hibernateUtil.fetchAll(Category.class);
 	}
+
 
 }

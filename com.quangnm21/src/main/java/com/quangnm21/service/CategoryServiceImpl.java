@@ -6,21 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.quangnm21.dao.ICategoryDao;
+import com.quangnm21.dao.CategoryDao;
 import com.quangnm21.entity.Category;
 
 
 @Service
 @Transactional
-public class CategoryServiceImpl implements ICategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
-	private ICategoryDao categoryDao;
+	private CategoryDao categoryDao;
 
 	@Override
 	public List<Category> getAllCategorys() {
-		// TODO Auto-generated method stub
 		return categoryDao.getAllCategorys();
 	}
-
 }

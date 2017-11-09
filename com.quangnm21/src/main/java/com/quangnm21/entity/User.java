@@ -10,12 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="user")
-public class User implements Serializable{
+public class User implements Serializable {
 
 	/**
 	 *
@@ -24,24 +25,26 @@ public class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "UserID", unique = true)
+	@Column(name = "id", unique = true)
 	private int id;
 
-	@Column(name ="UserName", length = 30)
+	@Column(name ="username", length = 16)
 	private String username;
 
-	@Column(name ="Email", length = 30)
+	@Column(name ="email", length = 255)
 	private String email;
 
-	@Column(name ="Password", length = 30)
+	@Column(name ="password", length = 32)
 	private String password;
 
-	@Column(name ="TimeInEnd")
-	private String timeInEnd;
+	@Column(name ="create_time")
+	private String create_time;
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	private Set<Episode> episodes = new HashSet<Episode>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private Set<Store> store = new HashSet<Store>(0);
-
+	private Set<UserRating> userRating = new HashSet<UserRating>();
 
 	public int getId() {
 		return id;
@@ -75,20 +78,28 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public String getTimeInEnd() {
-		return timeInEnd;
+	public String getCreate_time() {
+		return create_time;
 	}
 
-	public void setTimeInEnd(String timeInEnd) {
-		this.timeInEnd = timeInEnd;
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
 	}
 
-	public Set<Store> getStore() {
-		return store;
+	public Set<Episode> getEpisodes() {
+		return episodes;
 	}
 
-	public void setStore(Set<Store> store) {
-		this.store = store;
+	public void setEpisodes(Set<Episode> episodes) {
+		this.episodes = episodes;
+	}
+
+	public Set<UserRating> getUserRating() {
+		return userRating;
+	}
+
+	public void setUserRating(Set<UserRating> userRating) {
+		this.userRating = userRating;
 	}
 
 }

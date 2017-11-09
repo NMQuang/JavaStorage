@@ -11,14 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="channel")
-public class Channel  implements Serializable{
+public class Channel implements Serializable {
 
 	/**
 	 *
@@ -27,69 +27,126 @@ public class Channel  implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ChannelID", unique = true, nullable = false)
+	@Column(name = "id", unique = true)
 	private int id;
 
-	@Column(name = "ChanName", length= 30)
-	private String chanName;
+	@Column(name ="name", length = 45)
+	private String name;
 
-	@Column(name = "Timer")
-	private String time;
+	@Column(name ="viewcount")
+	private int viewcount;
 
-	@Column(name = "Appreciate")
-	private int appreciate;
+	@Column(name ="status")
+	private int status;
 
-	@Column(name = "State")
-	private int state;
+	@Column(name ="created_time")
+	private String created_time;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name ="CatID", nullable = false)
-	private Category category;
+	@Column(name ="rsspath", length = 45)
+	private String rsspath;
+
+	@Column(name ="channelcode", length = 45)
+	private String channelcode;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "channel")
-	private Set<Store> store = new HashSet<Store>(0);
+	private Set<Episode> episode = new HashSet<Episode>();
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "channels")
+	private Set<Category> categories = new HashSet<Category>();
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="ownerID", nullable = false)
+	private Owner owner;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "channel")
+	private Set<UserRating> userRating = new HashSet<UserRating>();
 
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getChanName() {
-		return chanName;
+
+	public String getName() {
+		return name;
 	}
-	public void setChanName(String chanName) {
-		this.chanName = chanName;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getTime() {
-		return time;
+
+	public int getViewcount() {
+		return viewcount;
 	}
-	public void setTime(String time) {
-		this.time = time;
+
+	public void setViewcount(int viewcount) {
+		this.viewcount = viewcount;
 	}
-	public int getAppreciate() {
-		return appreciate;
+
+	public int getStatus() {
+		return status;
 	}
-	public void setAppreciate(int appreciate) {
-		this.appreciate = appreciate;
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
-	public int getState() {
-		return state;
+
+	public String getCreated_time() {
+		return created_time;
 	}
-	public void setState(int state) {
-		this.state = state;
+
+	public void setCreated_time(String created_time) {
+		this.created_time = created_time;
 	}
-	public Category getCategory() {
-		return category;
+
+	public String getRsspath() {
+		return rsspath;
 	}
-	public void setCategory(Category category) {
-		this.category = category;
+
+	public void setRsspath(String rsspath) {
+		this.rsspath = rsspath;
 	}
-	public Set<Store> getStore() {
-		return store;
+
+	public String getChannelcode() {
+		return channelcode;
 	}
-	public void setStore(Set<Store> store) {
-		this.store = store;
+
+	public void setChannelcode(String channelcode) {
+		this.channelcode = channelcode;
+	}
+
+	public Set<Episode> getEpisode() {
+		return episode;
+	}
+
+	public void setEpisode(Set<Episode> episode) {
+		this.episode = episode;
+	}
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
+
+	public Set<UserRating> getUserRating() {
+		return userRating;
+	}
+
+	public void setUserRating(Set<UserRating> userRating) {
+		this.userRating = userRating;
 	}
 
 }
