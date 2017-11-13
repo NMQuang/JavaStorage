@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Grab QV System</title>
+    <link rel="stylesheet" type="text/css" href="src/assets/bootstrap-3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <br>
+    <br>
+    <div class="container-fluid" id="app">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="alert alert-info" role="alert">
+                    <h4>Thông tin khách hàng</h4>
+                </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item" v-for="note in notes">
+                        <span class="pull-right" title="remove KH" @click="deleteNote(note.title)">
+                <span class="glyphicon glyphicon-remove"></span>
+                        </span>
+                        <h4 class="list-group-item-heading">{{note.title}}</h4>
+                        <p class="list-group-item-text">
+                            {{note.content}}
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <form>
+                    <legend>Đặt Grab</legend>
+                    <div class="form-group">
+                        <label for="txtNoteTitle">Địa điểm đón</label>
+                        <input id="txtNoteTitle" type="text" class="form-control" placeholder="Nhập địa điểm" v-model="newNoteTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtNoteContent">Loại xe</label>
+                        <input id="txtNoteContent" type="text" class="form-control" placeholder="Nhập loại xe" v-model="newNoteContent">
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block" @click="addNote">
+              <span class="glyphicon glyphicon-ok"></span>
+              Save
+            </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="src/assets/jquery-3.1.1.min.js"></script>
+    <script src="src/assets/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="src/assets/vue-2.5.3.js"></script>
+    <script src="src/main.js"></script>
+</body>
+
+</html>
