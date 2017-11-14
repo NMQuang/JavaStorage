@@ -21,14 +21,14 @@
               <form>
                   <legend>Đặt Grab</legend>
                   <div class="form-group">
-                      <label for="txtNoteTitle">Địa điểm đón</label>
-                      <input id="txtNoteTitle" type="text" class="form-control" placeholder="Nhập địa điểm" v-model="newNoteTitle">
+                      <label for="pointPlace">Địa điểm đón</label>
+                      <input id="pointPlace" type="text" class="form-control" placeholder="Nhập địa điểm" v-model="newPoint.place">
                   </div>
                   <div class="form-group">
-                      <label for="txtNoteContent">Loại xe</label>
-                      <input id="txtNoteContent" type="text" class="form-control" placeholder="Nhập loại xe" v-model="newNoteContent">
+                      <label for="pointType">Loại xe</label>
+                      <input id="pointType" type="text" class="form-control" placeholder="Nhập loại xe" v-model="newPoint.type">
                   </div>
-                  <button type="button" class="btn btn-primary btn-block" @click="addNote">
+                  <button type="button" class="btn btn-primary btn-block" @click="addPoint">
             <span class="glyphicon glyphicon-ok"></span>
             Save
           </button>
@@ -60,6 +60,22 @@ export default {
   name: 'app',
   firebase: {
     points: pointsRef
+  },
+  data () {
+    return {
+      newPoint: {
+        place: '',
+        type: '',
+        status: ''
+      }
+    }
+  },
+  methods: {
+    addPoint: function() {
+      pointsRef.push(this.newPoint)
+      this.newPoint.place = ''
+      this.newPoint.type = ''
+    }
   }
 }
 </script>
